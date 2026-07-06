@@ -9,12 +9,14 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>,
 )
 
-// Preload the brochure PDF in the background after the app has loaded,
-// so the Brochure page opens instantly. Dynamic import keeps pdf.js out
-// of the main bundle.
+// Preload the brochure PDF, all route chunks and page images in the
+// background after the app has loaded, so every page opens instantly.
+// Dynamic imports keep them out of the main bundle.
 const preloadBrochureInBackground = () => {
-  const start = () =>
+  const start = () => {
+    import('./lib/warmup').then((m) => m.startWarmup()).catch(() => { })
     import('./lib/brochurePdf').then((m) => m.preloadBrochure()).catch(() => { })
+  }
   if ('requestIdleCallback' in window) {
     requestIdleCallback(() => start(), { timeout: 4000 })
   } else {
