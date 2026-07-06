@@ -214,9 +214,11 @@ export default function Brochure() {
             width: 864,
             height: 864,
             size: "stretch",
-            minWidth: 320,
+            // In stretch mode minWidth only sets the portrait threshold:
+            // container < 2*minWidth (760px) → single-page mode (phones + portrait tablets)
+            minWidth: 380,
             maxWidth: 1200,
-            minHeight: 320,
+            minHeight: 220,
             maxHeight: 1200,
             drawShadow: true,
             showCover: true,
@@ -548,7 +550,7 @@ export default function Brochure() {
 
 
     return (
-        <div className="relative w-screen h-screen overflow-hidden bg-[#12140e] flex">
+        <div className="relative w-screen h-dvh overflow-hidden bg-[#12140e] flex">
             {/* Blurred background map */}
             <div
                 className="absolute inset-0 bg-cover bg-center filter blur-xl scale-105 opacity-20 z-0"
@@ -571,9 +573,10 @@ export default function Brochure() {
             </button> */}
 
             {/* Main PDF Book Viewer Container */}
-            <div className="w-full h-full z-10 pl-[12%] py-6 pr-6 flex items-center justify-center relative">
+            {/* pl uses max() so the book never slides under the left navbar on narrow screens */}
+            <div className="w-full h-full z-10 pl-[max(12%,64px)] py-2 pr-2 sm:py-4 sm:pr-4 lg:py-6 lg:pr-6 flex items-center justify-center relative">
                 <div
-                    className="w-full h-full rounded-[24px] overflow-hidden border shadow-2xl flex flex-col transition-all duration-500"
+                    className="w-full h-full min-w-0 min-h-0 rounded-[14px] sm:rounded-[24px] overflow-hidden border shadow-2xl flex flex-col transition-all duration-500"
                     style={{
                         backgroundColor: "rgba(28, 30, 22, 0.95)",
                         border: "1.5px solid rgba(219, 156, 47, 0.35)",
@@ -582,32 +585,33 @@ export default function Brochure() {
                 >
                     {/* Custom Premium Gold Header Bar */}
                     <div
-                        className="h-14 px-6 flex items-center justify-between shrink-0"
+                        className="h-11 sm:h-14 px-2 sm:px-4 lg:px-6 flex items-center justify-between gap-1.5 shrink-0"
                         style={{
                             background: "linear-gradient(90deg, rgba(42, 46, 34, 0.98) 0%, rgba(28, 30, 22, 0.99) 100%)",
                             borderBottom: "1.5px solid rgba(219, 156, 47, 0.35)"
                         }}
                     >
                         {/* Title & Back Button */}
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-3 min-w-0">
                             <button
                                 onClick={() => navigate(-1)}
-                                className="px-3 py-1.5 rounded-full border border-[#DB9B2F]/40 hover:bg-[#DB9B2F]/10 text-[#FFE2A4] font-bold text-[10px] tracking-wider uppercase flex items-center gap-1.5 transition-all duration-300"
+                                className="px-2.5 sm:px-3 py-1.5 rounded-full border border-[#DB9B2F]/40 hover:bg-[#DB9B2F]/10 text-[#FFE2A4] font-bold text-[10px] tracking-wider uppercase flex items-center gap-1.5 transition-all duration-300 whitespace-nowrap"
                             >
-                                ← Back
+                                <span className="sm:hidden">←</span>
+                                <span className="hidden sm:inline">← Back</span>
                             </button>
-                            <div className="hidden md:flex items-center gap-2">
-                                <span className="w-2 h-2 rounded-full bg-[#DB9B2F] animate-pulse" />
-                                <h2 className="text-[#FFE2A4] font-bold text-xs tracking-wider uppercase font-sans">
+                            <div className="hidden lg:flex items-center gap-2 min-w-0">
+                                <span className="w-2 h-2 rounded-full bg-[#DB9B2F] animate-pulse shrink-0" />
+                                <h2 className="text-[#FFE2A4] font-bold text-xs tracking-wider uppercase font-sans truncate">
                                     Hiranandani Sands - Brochure
                                 </h2>
                             </div>
                         </div>
 
                         {/* Premium Controls */}
-                        <div className="flex items-center gap-2.5">
+                        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
                             {/* Zoom indicators/controls */}
-                            <div className="flex items-center gap-1 border border-[#DB9B2F]/20 rounded-full px-2 py-0.5 bg-black/30">
+                            <div className="flex items-center gap-0.5 sm:gap-1 border border-[#DB9B2F]/20 rounded-full px-1.5 sm:px-2 py-0.5 bg-black/30">
                                 <button
                                     onClick={() => setZoomScale(prev => Math.max(prev - 0.25, 1.0))}
                                     disabled={zoomScale <= 1.0}
@@ -616,7 +620,7 @@ export default function Brochure() {
                                 >
                                     <ZoomOut size={13} />
                                 </button>
-                                <span className="text-[10px] font-sans font-semibold text-[#FFE2A4] min-w-[32px] text-center">
+                                <span className="hidden sm:block text-[10px] font-sans font-semibold text-[#FFE2A4] min-w-[32px] text-center">
                                     {Math.round(zoomScale * 100)}%
                                 </span>
                                 <button
@@ -638,10 +642,10 @@ export default function Brochure() {
                                 )}
                             </div>
 
-                            {/* Fullscreen Button */}
+                            {/* Fullscreen Button (hidden on phones — iOS Safari doesn't support it) */}
                             <button
                                 onClick={toggleFullscreen}
-                                className="p-2 rounded-full border border-[#DB9B2F]/30 hover:bg-[#DB9B2F]/10 text-[#FFE2A4] transition-all duration-300"
+                                className="hidden sm:block p-2 rounded-full border border-[#DB9B2F]/30 hover:bg-[#DB9B2F]/10 text-[#FFE2A4] transition-all duration-300"
                                 title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
                             >
                                 {isFullscreen ? <Minimize size={13} /> : <Maximize size={13} />}
@@ -651,7 +655,7 @@ export default function Brochure() {
                             <a
                                 href={pdfFile}
                                 download="Hiranandani_Sands_Brochure.pdf"
-                                className="px-4 py-1.5 rounded-full bg-[#DB9B2F] hover:bg-[#FFE2A4] text-slate-950 hover:text-[#644406] font-bold text-[10px] tracking-wider uppercase flex items-center gap-1.5 transition-all duration-300 shadow-md shadow-[#DB9B2F]/20 cursor-pointer pointer-events-auto"
+                                className="px-2.5 sm:px-4 py-1.5 rounded-full bg-[#DB9B2F] hover:bg-[#FFE2A4] text-slate-950 hover:text-[#644406] font-bold text-[10px] tracking-wider uppercase flex items-center gap-1.5 transition-all duration-300 shadow-md shadow-[#DB9B2F]/20 cursor-pointer pointer-events-auto whitespace-nowrap"
                             >
                                 <Download size={13} />
                                 <span className="hidden sm:inline">Download</span>
@@ -694,18 +698,23 @@ export default function Brochure() {
                         )}
 
                         {!loading && !error && virtualPages.length > 0 && (
-                            <div className="w-full h-full flex items-center justify-center relative">
-                                {/* 3D Book aspect-ratio wrapper */}
+                            <div className="w-full h-full flex items-center justify-center relative p-1.5 sm:p-3">
+                                {/* 3D Book aspect-ratio wrapper.
+                                    In landscape spread mode the closed front cover sits on the right
+                                    half (and the back cover on the left), so shift the book a quarter
+                                    of its width to keep the visible page visually centered. */}
                                 <div
                                     className={`flex items-center justify-center cursor-grab active:cursor-grabbing`}
                                     style={{
-                                        transform: `scale(${zoomScale}) translate(${panX}px, ${panY}px)`,
+                                        transform: `scale(${zoomScale}) translate(${panX}px, ${panY}px) translateX(${orientation === 'landscape'
+                                            ? (activePageIndex === 0 ? -25 : activePageIndex >= virtualPages.length - 1 ? 25 : 0)
+                                            : 0}%)`,
                                         transformOrigin: "center center",
                                         transition: isDraggingPan ? "none" : "transform 0.2s cubic-bezier(0.1, 0.9, 0.2, 1)",
                                         width: "100%",
                                         height: "100%",
-                                        maxWidth: orientation === 'portrait' ? '82vh' : '164vh',
-                                        maxHeight: orientation === 'portrait' ? '82vw' : '82vh',
+                                        maxWidth: orientation === 'portrait' ? 'min(82vh, 100%)' : 'min(164vh, 100%)',
+                                        maxHeight: orientation === 'portrait' ? 'min(92vw, 100%)' : 'min(82vh, 100%)',
                                         aspectRatio: orientation === 'portrait' ? '1' : '2',
                                     }}
                                     onDoubleClick={handleDoubleClick}
@@ -730,14 +739,15 @@ export default function Brochure() {
 
                                 {/* Panning Overlay instructions when zoomed */}
                                 {zoomScale > 1.0 && (
-                                    <div className="absolute top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-black/60 border border-[#DB9B2F]/30 backdrop-blur-sm text-[#FFE2A4] text-[10px] tracking-wider uppercase font-sans z-30 pointer-events-none">
-                                        Drag to Pan | Double Click to Zoom Out
+                                    <div className="absolute top-2 sm:top-4 left-1/2 -translate-x-1/2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-black/60 border border-[#DB9B2F]/30 backdrop-blur-sm text-[#FFE2A4] text-[8px] sm:text-[10px] tracking-wider uppercase font-sans z-30 pointer-events-none whitespace-nowrap max-w-[92%] truncate">
+                                        <span className="sm:hidden">Drag to Pan | Double Tap to Reset</span>
+                                        <span className="hidden sm:inline">Drag to Pan | Double Click to Zoom Out</span>
                                     </div>
                                 )}
 
                                 {/* Page Indicator */}
                                 {isEditingPage ? (
-                                    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 px-5 py-2 rounded-full bg-black/85 border border-[#DB9B2F] backdrop-blur-md text-[#FFE2A4] text-[11px] tracking-widest font-sans font-bold shadow-lg z-30 flex items-center gap-2">
+                                    <div className="absolute bottom-2 sm:bottom-6 left-1/2 -translate-x-1/2 px-3 sm:px-5 py-1.5 sm:py-2 rounded-full bg-black/85 border border-[#DB9B2F] backdrop-blur-md text-[#FFE2A4] text-[10px] sm:text-[11px] tracking-widest font-sans font-bold shadow-lg z-30 flex items-center gap-2 whitespace-nowrap">
                                         <span className="w-1.5 h-1.5 rounded-full bg-[#DB9B2F] animate-pulse" />
                                         <span className="text-white/60">Go to Page:</span>
                                         <input
@@ -770,12 +780,12 @@ export default function Brochure() {
                                                 setPageInputVal("");
                                             }
                                         }}
-                                        className="absolute bottom-6 left-1/2 -translate-x-1/2 px-5 py-2 rounded-full bg-black/65 hover:bg-black/85 hover:border-[#DB9B2F] border border-[#DB9B2F]/30 backdrop-blur-md text-[#FFE2A4] text-[11px] tracking-widest font-sans font-bold shadow-lg z-30 flex items-center gap-2 cursor-pointer transition-all duration-300"
+                                        className="absolute bottom-2 sm:bottom-6 left-1/2 -translate-x-1/2 px-3 sm:px-5 py-1.5 sm:py-2 rounded-full bg-black/65 hover:bg-black/85 hover:border-[#DB9B2F] border border-[#DB9B2F]/30 backdrop-blur-md text-[#FFE2A4] text-[10px] sm:text-[11px] tracking-widest font-sans font-bold shadow-lg z-30 flex items-center gap-2 cursor-pointer transition-all duration-300 whitespace-nowrap"
                                         title="Click to enter page number"
                                     >
                                         <span className="w-1.5 h-1.5 rounded-full bg-[#DB9B2F] animate-pulse" />
                                         {getPageIndicatorText()}
-                                        <span className="text-[9px] text-[#FFE2A4]/40 font-normal ml-1 lowercase">(click to go)</span>
+                                        <span className="hidden sm:inline text-[9px] text-[#FFE2A4]/40 font-normal ml-1 lowercase">(click to go)</span>
                                     </div>
                                 )}
                             </div>
