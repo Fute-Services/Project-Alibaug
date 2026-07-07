@@ -265,7 +265,7 @@ export default function Amenities() {
             style={{ background: "linear-gradient(180deg, #BFC18D 0%, #9BA06E 100%)" }}
         >
             {/* Left Sidebar and Right Sidebar should be absolute to viewport */}
-            <div className="absolute top-[53%] lg:top-[55%] left-[6%] z-[999] -translate-y-1/2 -translate-x-1/2">
+            <div className="absolute top-[53%] lg:top-[55%] left-[4%] md:left-[6%] z-[999] -translate-y-1/2 -translate-x-1/2 scale-[.5] md:scale-[.72] lg:scale-100">
                 <LeftNavbar />
             </div>
 

@@ -96,12 +96,12 @@ const RightNavbar = () => {
   // const { bgTheme, setBgTheme } = useContext(BackgroundContext)
   // const location = useLocation() // Get the current active route
 
-  const darkCircle = 'w-[30px] lg:w-[48px] h-[30px] lg:h-[48px] rounded-full flex items-center justify-center bg-[#1e2018]/80 transition-all duration-300'
-  const goldenCircle = 'w-[30px] lg:w-[48px] h-[30px] lg:h-[48px] rounded-full flex items-center justify-center bg-[#FFCF77] transition-all duration-300'
+  const darkCircle = 'w-[36px] md:w-[40px] lg:w-[48px] h-[36px] md:h-[40px] lg:h-[48px] rounded-full flex items-center justify-center bg-[#1e2018]/80 transition-all duration-300'
+  const goldenCircle = 'w-[36px] md:w-[40px] lg:w-[48px] h-[36px] md:h-[40px] lg:h-[48px] rounded-full flex items-center justify-center bg-[#FFCF77] transition-all duration-300'
 
   return (
     <>
-      <div className="fixed right-5 lg:right-8 top-[55%] lg:top-1/2 font-sans -translate-y-1/2 z-50 flex flex-col items-center w-[38px] lg:w-[60px]">
+      <div className="fixed right-4 md:right-5 lg:right-8 top-[50%] lg:top-1/2 font-sans -translate-y-1/2 z-50 flex flex-col items-center w-[46px] md:w-[52px] lg:w-[60px] scale-[.5] md:scale-[.72] lg:scale-100">
         <motion.div
           initial={{ x: 100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -124,9 +124,9 @@ const RightNavbar = () => {
                 {({ isActive }) => (
                   <>
                     <div className={isActive ? goldenCircle : darkCircle}>
-                      <img src={item.icon} alt={item.label} style={{ filter: isActive ? 'brightness(0)' : 'brightness(0) invert(1)' }} className="w-[14px] h-[14px] lg:w-[22px] lg:h-[22px]" />
+                      <img src={item.icon} alt={item.label} style={{ filter: isActive ? 'brightness(0)' : 'brightness(0) invert(1)' }} className="w-[17px] h-[17px] md:w-[19px] md:h-[19px] lg:w-[22px] lg:h-[22px]" />
                     </div>
-                    <span className="text-[6.5px] lg:text-[9px] text-white mt-[3px] text-center whitespace-pre-line leading-[1.3] select-none">
+                    <span className="text-[7.5px] md:text-[8px] lg:text-[9px] text-white mt-[3px] text-center whitespace-pre-line leading-[1.3] select-none">
                       {item.label}
                     </span>
                   </>
@@ -138,9 +138,9 @@ const RightNavbar = () => {
           {/* 360 Button */}
           <button
             onClick={() => navigate("/360")}
-            className="mt-2 w-[30px] lg:w-12 h-[30px] lg:h-12 rounded-full bg-gradient-to-b border border-white/20 
+            className="mt-2 w-[36px] md:w-[40px] lg:w-12 h-[36px] md:h-[40px] lg:h-12 rounded-full bg-gradient-to-b border border-white/20
             bg-gradient-to-br from-[#A56A09] cursor-pointer to-[#8C5707]/70
-            text-white/80 font-medium text-[8px] lg:text-[10px] shadow-sm shadow-black/40
+            text-white/80 font-medium text-[9px] md:text-[9.5px] lg:text-[10px] shadow-sm shadow-black/40
             flex items-center justify-center duration-300 translate-all hover:text-black/60
             hover:scale-110 transition-all"
           >

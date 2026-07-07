@@ -91,8 +91,8 @@ export default function ActiveArena({ onBack }: ActiveArenaProps) {
     }, []);
 
     return (
-        <div ref={scrollRef} className="relative w-screen h-screen overflow-x-auto overflow-y-hidden lg:overflow-hidden bg-slate-950 flex items-center justify-start lg:justify-center font-sans select-none z-[1000] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            <div className="relative h-full aspect-[1982/1024] shrink-0 lg:w-full lg:h-full lg:aspect-auto flex items-center justify-center overflow-hidden">
+        <div ref={scrollRef} className="relative w-screen h-screen overflow-hidden bg-slate-950 flex items-center justify-center font-sans select-none z-[1000] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="relative w-full aspect-[1982/1024] shrink-0 lg:h-full lg:aspect-auto flex items-center justify-center overflow-hidden">
                 {/* Background Image */}
                 <img
                     src={bgImage}
@@ -101,7 +101,7 @@ export default function ActiveArena({ onBack }: ActiveArenaProps) {
                 />
 
                 {/* Navigation Bars - Left Navbar Container */}
-                <div className="fixed lg:absolute top-[50%] left-[6%] z-[999] -translate-y-1/2 -translate-x-1/2 flex flex-col items-center gap-4 lg:gap-5">
+                <div className="fixed lg:absolute top-[50%] left-[4%] md:left-[6%] z-[999] -translate-y-1/2 -translate-x-1/2 flex flex-col items-center gap-3 md:gap-4 lg:gap-5 scale-[.5] md:scale-[.72] lg:scale-100">
                     <LeftNavbar />
 
                     {/* Back Button */}
@@ -123,7 +123,7 @@ export default function ActiveArena({ onBack }: ActiveArenaProps) {
 
             {/* Right Sidebar - Glass Box Amenities List (Compact Style) */}
             <div
-                className="fixed lg:absolute top-[50%] right-[4%] lg:right-[-2.5%] z-[999] -translate-y-1/2 w-[145px] md:w-[185px] lg:w-[245px] py-1 md:py-2 lg:py-2.5 px-1.5 md:px-2.5 lg:px-3 rounded-[12px] md:rounded-[16px] lg:rounded-[20px]  transition-all duration-300"
+                className="fixed lg:absolute top-[50%] right-[4%] lg:right-[-2.5%] z-[999] -translate-y-1/2 w-[145px] md:w-[185px] lg:w-[245px] py-1 md:py-2 lg:py-2.5 px-1.5 md:px-2.5 lg:px-3 rounded-[12px] md:rounded-[16px] lg:rounded-[20px] scale-[.72] lg:scale-100 origin-right transition-all duration-300"
                 style={{
                     background: "rgba(42, 46, 34, 0.45)",
                     backdropFilter: "blur(20px)",

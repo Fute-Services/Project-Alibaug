@@ -146,7 +146,7 @@ const NavbarLink = ({
                   }
                   : undefined
               }
-              className={`text-[6.5px] lg:text-[8.5px] font-medium text-center leading-tight whitespace-pre-line select-none transition-colors duration-300
+              className={`text-[7.5px] md:text-[8px] lg:text-[8.5px] font-medium text-center leading-tight whitespace-pre-line select-none transition-colors duration-300
                 ${isThemeActive ? 'text-white/90' : hasGradientText ? 'text-white' : 'text-white'}`}
             >
               {label}
@@ -167,7 +167,7 @@ const LeftNavbar = () => {
       initial={{ x: -100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ type: "tween", ease: [0.25, 1, 0.5, 1], duration: 1.2, delay: 0.2 }}
-      className="flex flex-col items-center w-[38px] lg:w-[60px] gap-2"
+      className="flex flex-col items-center w-[46px] md:w-[52px] lg:w-[60px] gap-2"
     >
       <nav
         className="bg-[#2a2d1e]/50 backdrop-blur-xl font-sans border border-white/10
@@ -182,8 +182,8 @@ const LeftNavbar = () => {
             icon={item.icon}
             isCustom={item.isCustom}
             end={item.end}
-            heightClass="h-[50px] lg:h-[80px]"
-            iconWrapperClass="w-[24px] h-[24px] lg:w-[43px] lg:h-[44px]"
+            heightClass="h-[58px] md:h-[66px] lg:h-[80px]"
+            iconWrapperClass="w-[30px] h-[30px] md:w-[36px] md:h-[37px] lg:w-[43px] lg:h-[44px]"
             iconSizeClass={item.iconSizeClass}
           />
         ))}
@@ -196,12 +196,12 @@ const LeftNavbar = () => {
         icon={brochureItem.icon}
         isCustom={brochureItem.isCustom}
         end={brochureItem.end}
-        heightClass="h-[50px] lg:h-[80px]"
-        iconWrapperClass="w-[24px] h-[28px] lg:w-[40px] lg:h-[48px]"
+        heightClass="h-[58px] md:h-[66px] lg:h-[80px]"
+        iconWrapperClass="w-[30px] h-[34px] md:w-[34px] md:h-[40px] lg:w-[40px] lg:h-[48px]"
         inactiveBgClass="bg-[#2a2d1e]/50 border-white/10 shadow-2xl backdrop-blur-xl"
         disableFilter={true}
         hasGradientText={true}
-        iconSizeClass="w-[11px] h-[15px] lg:w-[17px] lg:h-[23px]"
+        iconSizeClass="w-[13px] h-[17px] md:w-[15px] md:h-[20px] lg:w-[17px] lg:h-[23px]"
       />
     </motion.div>
   );

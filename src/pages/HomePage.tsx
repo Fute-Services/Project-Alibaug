@@ -73,13 +73,13 @@ export default function HomePage() {
             style={{ background: "linear-gradient(180deg, #BFC18D 0%, #9BA06E 100%)" }}
         >
             {/* Left Navigation Bar */}
-            <div className="absolute top-[50%] lg:top-[50%] left-[6%] z-[999] -translate-y-1/2 -translate-x-1/2 flex flex-col items-center gap-4 lg:gap-5">
+            <div className="absolute top-[50%] left-[4%] md:left-[6%] z-[999] -translate-y-1/2 -translate-x-1/2 flex flex-col items-center gap-3 md:gap-4 lg:gap-5 scale-[.5] md:scale-[.72] lg:scale-100">
                 <LeftNavbar />
                 {/* Back Button — kept in the same column so the gap to the
                     Brochure button stays constant on every screen height */}
                 <button
                     onClick={() => navigate("/")}
-                    className="w-6 h-6 md:w-8 md:h-8 lg:w-11 lg:h-11 flex items-center justify-center hover:scale-105 transition-all duration-300 cursor-pointer"
+                    className="w-8 h-8 md:w-9 md:h-9 lg:w-11 lg:h-11 flex items-center justify-center hover:scale-105 transition-all duration-300 cursor-pointer"
                     title="Back to Intro"
                 >
                     <img src={backIcon} alt="Back" className="w-full h-full object-contain" />
@@ -187,7 +187,7 @@ export default function HomePage() {
                                         }}
                                     >
                                         <span
-                                            className="text-[9px] lg:text-[13px] font-bold tracking-wider font-sans uppercase transition-colors duration-300"
+                                            className="text-[10px] md:text-[11px] lg:text-[13px] font-bold tracking-wider font-sans uppercase transition-colors duration-300"
                                             style={{
                                                 color: isThisTooltipHovered ? "#FFFFFF" : "#4a3b2c",
                                             }}

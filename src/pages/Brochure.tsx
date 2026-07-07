@@ -559,7 +559,7 @@ export default function Brochure() {
             <div className="absolute inset-0 bg-[#0e100a]/85 z-[1]" />
 
             {/* Navigation Bars - Left Navbar Container */}
-            <div className="absolute top-[48%] lg:top-[55%] left-[6%] z-[999] -translate-y-1/2 -translate-x-1/2">
+            <div className="absolute top-[48%] lg:top-[55%] left-[4%] md:left-[6%] z-[999] -translate-y-1/2 -translate-x-1/2 scale-[.5] md:scale-[.72] lg:scale-100">
                 <LeftNavbar />
             </div>
 

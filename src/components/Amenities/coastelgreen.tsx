@@ -146,8 +146,8 @@ export default function CoastalGreen({ onBack }: CoastalGreenProps) {
     }, []);
 
     return (
-        <div ref={scrollRef} className="relative w-screen h-screen overflow-x-auto overflow-y-hidden lg:overflow-hidden bg-slate-950 flex items-center justify-start lg:justify-center font-sans select-none z-[1000] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            <div className="relative h-full aspect-[1982/1024] shrink-0 lg:w-full lg:h-full lg:aspect-auto flex items-center justify-center overflow-hidden">
+        <div ref={scrollRef} className="relative w-screen h-screen overflow-hidden bg-slate-950 flex items-center justify-center font-sans select-none z-[1000] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="relative w-full aspect-[1982/1024] shrink-0 lg:h-full lg:aspect-auto flex items-center justify-center overflow-hidden">
                 {/* Background Image */}
                 <img
                     src={is3DActive ? cam01 : bgImage}
@@ -156,7 +156,7 @@ export default function CoastalGreen({ onBack }: CoastalGreenProps) {
                 />
 
                 {/* Navigation Bars - Left Navbar Container */}
-                <div className="fixed lg:absolute top-[50%] left-[6%] z-[999] -translate-y-1/2 -translate-x-1/2 flex flex-col items-center gap-4 lg:gap-5">
+                <div className="fixed lg:absolute top-[50%] left-[4%] md:left-[6%] z-[999] -translate-y-1/2 -translate-x-1/2 flex flex-col items-center gap-3 md:gap-4 lg:gap-5 scale-[.5] md:scale-[.72] lg:scale-100">
                     <LeftNavbar />
 
                     {/* Back Button */}
@@ -182,7 +182,7 @@ export default function CoastalGreen({ onBack }: CoastalGreenProps) {
 
                 {/* Right Controls Container (Groups 3D button and list box on mobile/tablet to avoid overlap) */}
                 {!is3DActive && (
-                    <div className="fixed top-[50%] -translate-y-1/2 right-[4%] lg:right-auto lg:top-auto lg:translate-y-0 z-[999] flex flex-col items-end gap-4 lg:contents">
+                    <div className="fixed top-[50%] -translate-y-1/2 right-[4%] lg:right-auto lg:top-auto lg:translate-y-0 z-[999] flex flex-col items-end gap-4 lg:contents scale-[.72] lg:scale-100 origin-right">
                         {/* Explore 3D View Button */}
                         <div
                             onClick={() => {

@@ -205,7 +205,7 @@ export default function ProjectInfo() {
             </div>
 
             {/* Left Navbar */}
-            <div className="absolute top-[45%] lg:top-[50%] left-[6%] z-[999] -translate-y-1/2 -translate-x-1/2">
+            <div className="absolute top-[45%] lg:top-[50%] left-[4%] md:left-[6%] z-[999] -translate-y-1/2 -translate-x-1/2 scale-[.5] md:scale-[.72] lg:scale-100">
                 <LeftNavbar />
             </div>
 
