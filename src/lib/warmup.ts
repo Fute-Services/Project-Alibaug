@@ -128,6 +128,24 @@ function preloadImages(urls: string[], concurrency = 4): Promise<void> {
   });
 }
 
+// Decide whether the browser can afford the *heavy* background prefetch — the
+// page videos, the multi-MB brochure PDF and the external 360 tour. On phones
+// with Save-Data enabled or a slow connection this prefetch saturates the
+// network and CPU and makes the page the user is actually looking at stutter,
+// so we skip it and let those assets load on demand instead.
+export function shouldPrefetchHeavy(): boolean {
+  try {
+    const c = (navigator as any).connection;
+    if (!c) return true; // no Network Information API (desktop/Safari) — assume capable
+    if (c.saveData) return false;
+    const t: string = c.effectiveType || "";
+    if (t === "slow-2g" || t === "2g" || t === "3g") return false;
+    return true;
+  } catch {
+    return true;
+  }
+}
+
 let started = false;
 
 export function startWarmup(): void {
@@ -141,7 +159,11 @@ export function startWarmup(): void {
     await preloadImages(Object.values(stage2Images));
     await preloadImages(Object.values(stage3Images));
     await preloadImages(Object.values(stage4Images), 3);
-    await prefetchVideos(Object.values(stageVideos));
-    await prewarmTour();
+
+    // Heavy stages only on capable connections (skipped on slow/metered mobile).
+    if (shouldPrefetchHeavy()) {
+      await prefetchVideos(Object.values(stageVideos));
+      await prewarmTour();
+    }
   })().catch(() => {});
 }

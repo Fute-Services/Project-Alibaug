@@ -1,10 +1,15 @@
 // Loads the brochure PDF once (bundled pdf.js, no CDN) and caches the parsed
 // document + virtual page layout so the Brochure page opens instantly.
 import * as pdfjsLib from "pdfjs-dist";
-import workerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
+// Inline the pdf.js worker into the bundle (base64 blob) instead of shipping a
+// separate .mjs file. Many static hosts (Apache/cPanel/Nginx without an .mjs
+// MIME mapping) serve .mjs as text/plain, which blocks the module worker and
+// leaves the brochure stuck on "Loading...". An inlined blob worker loads on
+// any host regardless of server MIME configuration.
+import PdfWorker from "pdfjs-dist/build/pdf.worker.min.mjs?worker&inline";
 import pdfFile from "../assets/Hiranandani sand brochure Plots.pdf";
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl;
+pdfjsLib.GlobalWorkerOptions.workerPort = new PdfWorker();
 
 export interface VirtualPage {
     id: string;

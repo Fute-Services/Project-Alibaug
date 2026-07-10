@@ -14,8 +14,14 @@ createRoot(document.getElementById('root')!).render(
 // Dynamic imports keep them out of the main bundle.
 const preloadBrochureInBackground = () => {
   const start = () => {
-    import('./lib/warmup').then((m) => m.startWarmup()).catch(() => { })
-    import('./lib/brochurePdf').then((m) => m.preloadBrochure()).catch(() => { })
+    import('./lib/warmup').then((m) => {
+      m.startWarmup()
+      // Only preload the multi-MB brochure PDF on capable connections; on slow
+      // or Save-Data mobile it loads on demand when the Brochure page opens.
+      if (m.shouldPrefetchHeavy()) {
+        import('./lib/brochurePdf').then((b) => b.preloadBrochure()).catch(() => { })
+      }
+    }).catch(() => { })
   }
   if ('requestIdleCallback' in window) {
     requestIdleCallback(() => start(), { timeout: 4000 })
